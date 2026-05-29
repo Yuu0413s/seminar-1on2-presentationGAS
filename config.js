@@ -57,6 +57,14 @@ var ROWS = {
   FOURTH_PERIOD_START: 3 + THIRD_PERIOD.length,
   FOURTH_PERIOD_END:   3 + THIRD_PERIOD.length + FOURTH_PERIOD.length - 1,
   LAST_DATA_ROW:       3 + THIRD_PERIOD.length + FOURTH_PERIOD.length + FIFTH_PERIOD.length - 1,
-  COUNTER_DATA_START:  2,
+  COUNTER_DATA_START:  3,  // row1: タイトル, row2: ヘッダー, row3〜: データ
   COUNTER_SORT_START:  3
+};
+
+// counterシートの列番号定義
+var COUNTER_COLS = {
+  STUDENT_ID: 1,
+  NAME:       2,
+  GRADE:      3,
+  COUNT:      4
 };
