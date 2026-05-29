@@ -41,7 +41,7 @@ function archiveOldSheets(ss) {
     var sheetDate = parseDateSheetName_(name);
     if (sheetDate < oldestKeepDate) {
       sheet.activate();
-      ss.moveActiveSheet(Math.min(counterIndex + 2, ss.getSheets().length));
+      ss.moveActiveSheet(ss.getSheets().length);
     }
   });
 }
