@@ -7,7 +7,7 @@ function onOpen() {
       { name: "学年順でソート（降順: M2→B1）",          functionName: "sortCounterByGradeDesc" },
       { name: "発表回数順でソート（昇順: 少ない順）",    functionName: "sortCounterByCountAsc"  },
       { name: "発表回数順でソート（降順: 多い順）",      functionName: "sortCounterByCountDesc" },
-      { name: "学年を1つ進める（毎年4月に実行）",       functionName: "updateGrades"           },
+      { name: "学籍番号順でソート",                     functionName: "sortCounterByStudentId" },
       { name: "counterシートのヘッダーを設定",          functionName: "setupCounterSheet"      }
     ]);
 }
@@ -58,6 +58,15 @@ function sortCounterByCount_(order) {
 
 function sortCounterByCountAsc()  { sortCounterByCount_("asc");  }
 function sortCounterByCountDesc() { sortCounterByCount_("desc"); }
+
+// counterシートを学籍番号の昇順でソートする
+function sortCounterByStudentId() {
+  sortCounter_(function(a, b) {
+    var idA = String(a[COUNTER_COLS.STUDENT_ID - 1]);
+    var idB = String(b[COUNTER_COLS.STUDENT_ID - 1]);
+    return idA.localeCompare(idB);
+  });
+}
 
 // --- ヘルパー ---
 
