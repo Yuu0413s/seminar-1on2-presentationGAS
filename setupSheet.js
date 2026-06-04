@@ -3,7 +3,7 @@
 
 function setupSheet(sheet) {
   sheet.getRange("1:1").breakApart();
-  sheet.getRange("A1:G1").merge();
+  sheet.getRange("A1:J1").merge();
   sheet.getRange("A1").setValue(
     "Please secure your slots by filling your name. Let's do 1 on 1 at least every couple of weeks."
   );
@@ -16,6 +16,7 @@ function setupSheet(sheet) {
     "予約者名(Student name)", "状態(situation)",
     "要望(Request)", "先生からの連絡(teacher's info)"
   ]]);
+  sheet.getRange("G2:H2").merge();
   sheet.getRange("A2:G2").setBackground(COLORS.HEADER_ROW);
   sheet.getRange("A2:G2").setFontSize(FONTS.BODY_SIZE);
 
