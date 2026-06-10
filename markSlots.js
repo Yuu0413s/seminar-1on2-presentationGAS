@@ -14,7 +14,6 @@ function markActiveSlots() {
 
   for (var i = 0; i < numRows; i++) {
     var row = ROWS.DATA_START + i;
-    if (row >= ROWS.FOURTH_PERIOD_START && row <= ROWS.FOURTH_PERIOD_END) continue;
     if (names[i][0]) {
       backgrounds[i][0] = COLORS.ACTIVE;
     }
@@ -41,7 +40,6 @@ function checkAndMarkDone() {
 
   for (var i = 0; i < numRows; i++) {
     var row = ROWS.DATA_START + i;
-    if (row >= ROWS.FOURTH_PERIOD_START && row <= ROWS.FOURTH_PERIOD_END) continue;
 
     var start  = data[i][0];
     var end    = data[i][1];

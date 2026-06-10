@@ -33,11 +33,7 @@ function setupSheet(sheet) {
     var row = fourthLabelRow + i;
     sheet.getRange(row, COLUMNS.START).setValue(slot[0]);
     sheet.getRange(row, COLUMNS.END).setValue(slot[1]);
-    sheet.getRange(row, COLUMNS.NAME, 1, 4).setBackground(COLORS.FOURTH_PERIOD_BG);
   });
-
-  sheet.getRange(fourthLabelRow, COLUMNS.NAME).setValue("皆さんの前で、発表したい人はここに。");
-  sheet.getRange(fourthLabelRow + 1, COLUMNS.NAME).setValue("If you like to present and discuss with others, please fill here.");
 
   var fifthLabelRow = ROWS.FOURTH_PERIOD_END + 1;
   sheet.getRange(fifthLabelRow, COLUMNS.PERIOD).setValue("5th");
