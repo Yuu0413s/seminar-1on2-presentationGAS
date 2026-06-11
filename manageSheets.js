@@ -1,13 +1,5 @@
 // シートの生成とアーカイブ
 
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu("1on2管理")
-    .addItem("予約なし未来シートを再生成", "rebuildEmptyFutureSheets")
-    .addItem("全未来シートを再生成（予約含む）", "rebuildAllFutureSheets")
-    .addToUi();
-}
-
 // 予約が入っていない未来シートのみ削除して再生成する
 function rebuildEmptyFutureSheets() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();

@@ -1,15 +1,20 @@
 // スプレッドシートを開いたときにメニューを追加する
 function onOpen() {
-  SpreadsheetApp.getActiveSpreadsheet()
-    .addMenu("1on2管理", [
-      { name: "名前順でソート",                         functionName: "sortCounterByName"      },
-      { name: "学年順でソート（昇順: B1→M2）",          functionName: "sortCounterByGradeAsc"  },
-      { name: "学年順でソート（降順: M2→B1）",          functionName: "sortCounterByGradeDesc" },
-      { name: "発表回数順でソート（昇順: 少ない順）",    functionName: "sortCounterByCountAsc"  },
-      { name: "発表回数順でソート（降順: 多い順）",      functionName: "sortCounterByCountDesc" },
-      { name: "学籍番号順でソート",                     functionName: "sortCounterByStudentId" },
-      { name: "counterシートのヘッダーを設定",          functionName: "setupCounterSheet"      }
-    ]);
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu("1on2管理")
+    .addSubMenu(ui.createMenu("counterソート")
+      .addItem("名前順でソート",                       "sortCounterByName"      )
+      .addItem("学年順でソート（昇順: B1→M2）",        "sortCounterByGradeAsc"  )
+      .addItem("学年順でソート（降順: M2→B1）",        "sortCounterByGradeDesc" )
+      .addItem("発表回数順でソート（昇順: 少ない順）",  "sortCounterByCountAsc"  )
+      .addItem("発表回数順でソート（降順: 多い順）",    "sortCounterByCountDesc" )
+      .addItem("学籍番号順でソート",                   "sortCounterByStudentId" )
+      .addItem("counterシートのヘッダーを設定",        "setupCounterSheet"      ))
+    .addSeparator()
+    .addSubMenu(ui.createMenu("シート管理")
+      .addItem("予約なし未来シートを再生成",           "rebuildEmptyFutureSheets")
+      .addItem("全未来シートを再生成（予約含む）",      "rebuildAllFutureSheets"  ))
+    .addToUi();
 }
 
 // --- ソート共通処理 ---
