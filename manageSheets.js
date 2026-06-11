@@ -1,5 +1,56 @@
 // シートの生成とアーカイブ
 
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("1on2管理")
+    .addItem("予約なし未来シートを再生成", "rebuildEmptyFutureSheets")
+    .addItem("全未来シートを再生成（予約含む）", "rebuildAllFutureSheets")
+    .addToUi();
+}
+
+// 予約が入っていない未来シートのみ削除して再生成する
+function rebuildEmptyFutureSheets() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  ss.getSheets().forEach(function(sheet) {
+    var name = sheet.getName();
+    if (!isDateSheetName_(name)) return;
+    var sheetDate = parseDateSheetName_(name);
+    if (sheetDate < today) return;
+    if (hasBooking_(sheet)) return;
+    ss.deleteSheet(sheet);
+  });
+
+  createFourWeekSheets(ss);
+}
+
+// 予約の有無に関わらず全ての未来シートを削除して再生成する
+function rebuildAllFutureSheets() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  ss.getSheets().forEach(function(sheet) {
+    var name = sheet.getName();
+    if (!isDateSheetName_(name)) return;
+    var sheetDate = parseDateSheetName_(name);
+    if (sheetDate < today) return;
+    ss.deleteSheet(sheet);
+  });
+
+  createFourWeekSheets(ss);
+}
+
+// NAME列にひとつでも値があれば予約ありとみなす
+function hasBooking_(sheet) {
+  var lastRow = sheet.getLastRow();
+  if (lastRow < ROWS.DATA_START) return false;
+  var names = sheet.getRange(ROWS.DATA_START, COLUMNS.NAME, lastRow - ROWS.DATA_START + 1, 1).getValues();
+  return names.some(function(row) { return row[0] !== ""; });
+}
+
 // トリガーから呼ばれるメイン関数
 function manageSheets() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
