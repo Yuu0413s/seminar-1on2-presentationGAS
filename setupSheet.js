@@ -16,9 +16,9 @@ function setupSheet(sheet) {
     "予約者名(Student name)", "状態(situation)",
     "要望(Request)", "先生からの連絡(teacher's info)"
   ]]);
-  sheet.getRange("G2:H2").merge();
-  sheet.getRange("A2:G2").setBackground(COLORS.HEADER_ROW);
-  sheet.getRange("A2:G2").setFontSize(FONTS.BODY_SIZE);
+  sheet.getRange(2, 7, ROWS.LAST_DATA_ROW - 1, 2).mergeAcross();
+  sheet.getRange("A2:H2").setBackground(COLORS.HEADER_ROW);
+  sheet.getRange("A2:H2").setFontSize(FONTS.BODY_SIZE);
 
   sheet.getRange(ROWS.DATA_START, COLUMNS.PERIOD).setValue("3rd");
   THIRD_PERIOD.forEach(function(slot, i) {

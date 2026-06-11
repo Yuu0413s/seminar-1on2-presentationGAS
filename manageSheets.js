@@ -9,13 +9,18 @@ function manageSheets() {
 
 function createFourWeekSheets(ss) {
   var today = new Date();
+  var counterSheet = ss.getSheetByName(SHEET_NAMES.COUNTER);
+  var counterIndex = counterSheet
+    ? ss.getSheets().indexOf(counterSheet)
+    : ss.getSheets().length;
+
   for (var i = 0; i < 4; i++) {
     var friday = getFriday(today, i);
     var sheetName = formatDate(friday);
     if (ss.getSheetByName(sheetName)) continue;
-    var totalSheets = ss.getSheets().length;
-    var sheet = ss.insertSheet(sheetName, totalSheets - 1);
+    var sheet = ss.insertSheet(sheetName, counterIndex);
     setupSheet(sheet);
+    counterIndex++;
   }
 }
 
